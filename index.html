@@ -3,41 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>我的主页</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 60px auto;
-      padding: 0 20px;
-      line-height: 1.8;
-    }
-    h1 {
-      margin-bottom: 8px;
-    }
-    .sub {
-      color: #666;
-      margin-bottom: 24px;
-    }
-    a {
-      color: #0366d6;
-      text-decoration: none;
-    }
-  </style>
+  <title>hangdah</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>你好，我是邓爱杭</h1>
-  <div class="sub">这是我的 GitHub Pages 个人主页。</div>
+  <div class="container">
+    <header>
+      <h1>hangdah</h1>
+      <div class="handle">@hangdah</div>
+    </header>
 
-  <p>我主要研究氧化物半导体、器件模拟与相关学习内容。</p>
+    <div class="section">
+      <div class="section-title">仓库</div>
+      <div class="card-list">
+        <a class="card" href="#">
+          <div class="card-title">技术文档</div>
+          <div class="card-desc">笔记、学习总结与研究记录</div>
+        </a>
+        <a class="card" href="#">
+          <div class="card-title">代码</div>
+          <div class="card-desc">项目源码、工具与实验代码</div>
+        </a>
+      </div>
+    </div>
 
-  <h2>关于我</h2>
-  <p>这里以后可以写你的研究方向、项目经历、联系方式。</p>
+    <div class="section">
+      <div class="section-title">链接</div>
+      <a class="external" href="https://github.com/hangdah" target="_blank" rel="noopener">
+        GitHub Profile
+      </a>
+    </div>
 
-  <h2>链接</h2>
-  <ul>
-    <li><a href="https://github.com/你的用户名" target="_blank">GitHub</a></li>
-    <li><a href="mailto:你的邮箱">邮箱</a></li>
-  </ul>
+    <footer>
+      &copy; 2026 hangdah · Hosted on GitHub Pages
+    </footer>
+  </div>
 </body>
 </html>
