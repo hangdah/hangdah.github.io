@@ -9,4 +9,4 @@
 - 线上页面：<https://hangdah.github.io/>
 - 已安装 Jekyll 时，本地运行 `jekyll serve`，再访问终端提示的本地地址。
 
-文档的新增和维护方式见 `_docs/how-to-add-docs.md`。
+完整的浏览、写作、分类管理、项目配置和发布方法见[《主页使用与维护指南》](_docs/how-to-add-docs.md)。

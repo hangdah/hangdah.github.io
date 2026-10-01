@@ -8,14 +8,14 @@
   description: MCU、DSP、实时控制与工程开发记录。
   primary: true
 
-- slug: matlab-tools
-  name: MATLAB 工具
-  description: 数据处理、可视化与实用工具开发。
+- slug: matlab-simulink
+  name: MATLAB 与 Simulink
+  description: 数据处理、可视化、建模仿真与实用工具开发。
   primary: true
 
-- slug: semiconductor-simulation
-  name: 半导体与器件仿真
-  description: 氧化物半导体、器件建模与仿真笔记。
+- slug: personal-thoughts
+  name: 个人思考
+  description: 阅读感悟、学习方法与对技术和生活的思考。
   primary: true
 
 - slug: site-guide
