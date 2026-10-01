@@ -4,12 +4,37 @@ title: 首页
 ---
 
 <section class="hero">
-  <p class="eyebrow">hangdah's knowledge base</p>
-  <h1>技术文档、学习记录与开源项目</h1>
-  <p class="hero-description">
-    分享电力电子、嵌入式与 DSP、MATLAB 工具，以及半导体与器件仿真相关的实践与思考。
-  </p>
-  <a class="primary-link" href="{{ '/docs/' | relative_url }}">浏览全部文档 <span aria-hidden="true">→</span></a>
+  <div class="hero-copy">
+    <p class="eyebrow">hangdah's knowledge base</p>
+    <h1>技术文档、<br />学习记录与开源项目</h1>
+    <p class="hero-description">
+      分享电力电子、嵌入式与 DSP、MATLAB 工具，以及半导体与器件仿真相关的实践与思考。
+    </p>
+    <div class="hero-actions">
+      <a class="primary-link" href="{{ '/docs/' | relative_url }}">浏览全部文档 <span aria-hidden="true">→</span></a>
+      <a class="secondary-link" href="#projects-title">查看开源项目</a>
+    </div>
+  </div>
+
+  <div class="hero-visual" aria-hidden="true">
+    <div class="visual-glow"></div>
+    <div class="knowledge-panel">
+      <div class="panel-bar">
+        <span></span><span></span><span></span>
+        <strong>KNOWLEDGE / NOTES</strong>
+      </div>
+      <p class="panel-label">Engineering notebook</p>
+      <p class="panel-title">From ideas<br />to implementation.</p>
+      <div class="panel-topics">
+        <span><b>01</b> Power electronics</span>
+        <span><b>02</b> Embedded &amp; DSP</span>
+        <span><b>03</b> MATLAB tools</span>
+        <span><b>04</b> Device simulation</span>
+      </div>
+    </div>
+    <span class="visual-badge badge-code">&lt;/&gt;</span>
+    <span class="visual-badge badge-signal">∿</span>
+  </div>
 </section>
 
 <section class="section" aria-labelledby="categories-title">
@@ -25,12 +50,15 @@ title: 首页
     {% for category in primary_categories %}
       {% assign category_docs = site.docs | where: "category", category.slug %}
       <a class="category-card" href="{{ '/docs/' | relative_url }}?category={{ category.slug }}">
+        <span class="category-number">0{{ forloop.index }}</span>
         <div class="category-card-header">
           <h3>{{ category.name }}</h3>
           <span aria-hidden="true">→</span>
         </div>
         <p>{{ category.description }}</p>
-        <span class="category-count">{{ category_docs.size }} 篇文档</span>
+        <span class="category-count">
+          {% if category_docs.size > 0 %}{{ category_docs.size }} 篇文档{% else %}持续更新中{% endif %}
+        </span>
       </a>
     {% endfor %}
   </div>
