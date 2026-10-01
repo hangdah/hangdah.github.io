@@ -1,0 +1,24 @@
+- slug: power-electronics
+  name: 电力电子
+  description: 变换器、控制策略与电源系统实践。
+  primary: true
+
+- slug: embedded-dsp
+  name: 嵌入式与 DSP
+  description: MCU、DSP、实时控制与工程开发记录。
+  primary: true
+
+- slug: matlab-tools
+  name: MATLAB 工具
+  description: 数据处理、可视化与实用工具开发。
+  primary: true
+
+- slug: semiconductor-simulation
+  name: 半导体与器件仿真
+  description: 氧化物半导体、器件建模与仿真笔记。
+  primary: true
+
+- slug: site-guide
+  name: 站点指南
+  description: 本站文档的编写与维护说明。
+  primary: false

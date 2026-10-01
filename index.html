@@ -1,42 +1,80 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>hangdah</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="container">
-    <header>
-      <h1>hangdah</h1>
-      <div class="handle">@hangdah</div>
-    </header>
+---
+layout: default
+title: 首页
+---
 
-    <div class="section">
-      <div class="section-title">仓库</div>
-      <div class="card-list">
-        <a class="card" href="#">
-          <div class="card-title">技术文档</div>
-          <div class="card-desc">笔记、学习总结与研究记录</div>
-        </a>
-        <a class="card" href="#">
-          <div class="card-title">代码</div>
-          <div class="card-desc">项目源码、工具与实验代码</div>
-        </a>
-      </div>
+<section class="hero">
+  <p class="eyebrow">hangdah's knowledge base</p>
+  <h1>技术文档、学习记录与开源项目</h1>
+  <p class="hero-description">
+    分享电力电子、嵌入式与 DSP、MATLAB 工具，以及半导体与器件仿真相关的实践与思考。
+  </p>
+  <a class="primary-link" href="{{ '/docs/' | relative_url }}">浏览全部文档 <span aria-hidden="true">→</span></a>
+</section>
+
+<section class="section" aria-labelledby="categories-title">
+  <div class="section-heading">
+    <div>
+      <p class="section-kicker">Knowledge</p>
+      <h2 id="categories-title">文档分类</h2>
     </div>
-
-    <div class="section">
-      <div class="section-title">链接</div>
-      <a class="external" href="https://github.com/hangdah" target="_blank" rel="noopener">
-        GitHub Profile
-      </a>
-    </div>
-
-    <footer>
-      &copy; 2026 hangdah · Hosted on GitHub Pages
-    </footer>
   </div>
-</body>
-</html>
+
+  <div class="category-grid">
+    {% assign primary_categories = site.data.categories | where: "primary", true %}
+    {% for category in primary_categories %}
+      {% assign category_docs = site.docs | where: "category", category.slug %}
+      <a class="category-card" href="{{ '/docs/' | relative_url }}?category={{ category.slug }}">
+        <div class="category-card-header">
+          <h3>{{ category.name }}</h3>
+          <span aria-hidden="true">→</span>
+        </div>
+        <p>{{ category.description }}</p>
+        <span class="category-count">{{ category_docs.size }} 篇文档</span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section" aria-labelledby="recent-title">
+  <div class="section-heading">
+    <div>
+      <p class="section-kicker">Recently updated</p>
+      <h2 id="recent-title">最近更新</h2>
+    </div>
+    <a class="text-link" href="{{ '/docs/' | relative_url }}">全部文档</a>
+  </div>
+
+  {% assign recent_docs = site.docs | sort: "updated" | reverse %}
+  <div class="document-list">
+    {% for doc in recent_docs limit: 5 %}
+      {% assign category_info = site.data.categories | where: "slug", doc.category | first %}
+      <article class="document-card">
+        <a href="{{ doc.url | relative_url }}">
+          <div class="document-meta">
+            <span class="tag">{{ category_info.name | default: doc.category }}</span>
+            <time datetime="{{ doc.updated | date: '%Y-%m-%d' }}">{{ doc.updated | date: "%Y-%m-%d" }}</time>
+          </div>
+          <h3>{{ doc.title }}</h3>
+          <p>{{ doc.description }}</p>
+        </a>
+      </article>
+    {% else %}
+      <p class="empty-state">文档正在整理中。</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section" aria-labelledby="projects-title">
+  <div class="section-heading">
+    <div>
+      <p class="section-kicker">Open source</p>
+      <h2 id="projects-title">精选项目</h2>
+    </div>
+    <a class="text-link" href="https://github.com/hangdah" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
+  </div>
+
+  <div id="project-list" class="project-list" aria-live="polite" aria-busy="true">
+    <p class="loading-state">正在加载项目…</p>
+  </div>
+</section>
