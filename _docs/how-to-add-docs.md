@@ -20,7 +20,7 @@ updated: 2026-10-01
 
 ## 正确预览网站
 
-不要直接双击仓库中的 `index.html`。该文件包含 Jekyll Front Matter 和 Liquid 模板，直接打开时会看到 `{% ... %}` 等未处理的源码。
+不要直接双击仓库中的 `index.html`。该文件包含 Jekyll Front Matter 和 Liquid 模板，直接打开时会看到未处理的模板标记。
 
 - 线上页面：<https://hangdah.github.io/>
 - 已安装 Jekyll 时，在仓库目录运行 `jekyll serve`，再访问终端显示的本地地址。
@@ -141,7 +141,7 @@ git diff
 
 ## 常见问题
 
-### 页面显示 `---` 或 `{% ... %}`
+### 页面显示 `---` 或 Liquid 模板标记
 
 这是直接打开了 Jekyll 源文件。请访问线上页面，或通过 `jekyll serve` 启动本地预览。
 
