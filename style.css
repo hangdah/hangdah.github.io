@@ -757,6 +757,306 @@ footer {
   font-size: 0.78rem;
 }
 
+.admin-intro {
+  max-width: 720px;
+}
+
+.admin-auth,
+.category-workspace {
+  padding: 26px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow);
+}
+
+.admin-section-heading,
+.workspace-heading,
+.category-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.admin-section-heading h2 {
+  font-size: 1.2rem;
+}
+
+.admin-section-heading p,
+.field-help,
+#connection-summary {
+  color: var(--color-muted);
+  font-size: 0.82rem;
+}
+
+.admin-section-heading a {
+  flex: 0 0 auto;
+  color: var(--color-accent-hover);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.admin-section-heading a:hover {
+  text-decoration: underline;
+}
+
+.token-form {
+  margin-top: 22px;
+}
+
+.token-form > label,
+.admin-field > span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-text);
+  font-size: 0.78rem;
+  font-weight: 650;
+}
+
+.token-input-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+.token-input-row input,
+.admin-field input,
+.admin-field textarea {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  outline: none;
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.token-input-row input {
+  padding: 10px 12px;
+}
+
+.admin-field input,
+.admin-field textarea {
+  padding: 9px 11px;
+  font-size: 0.88rem;
+}
+
+.admin-field textarea {
+  min-height: 68px;
+  resize: vertical;
+}
+
+.token-input-row input:focus,
+.admin-field input:focus,
+.admin-field textarea:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(11, 148, 136, 0.12);
+}
+
+.admin-field input:disabled {
+  background: #f2f4f3;
+  color: var(--color-muted);
+  cursor: not-allowed;
+}
+
+.field-help {
+  margin-top: 8px;
+}
+
+.primary-button,
+.secondary-button,
+.icon-button {
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 650;
+}
+
+.primary-button,
+.secondary-button {
+  padding: 9px 14px;
+  font-size: 0.84rem;
+}
+
+.primary-button {
+  border: 1px solid var(--color-accent);
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.primary-button:hover:not(:disabled) {
+  border-color: var(--color-accent-hover);
+  background: var(--color-accent-hover);
+}
+
+.secondary-button,
+.icon-button {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.secondary-button:hover:not(:disabled),
+.icon-button:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  color: var(--color-accent-hover);
+}
+
+.primary-button:disabled,
+.secondary-button:disabled,
+.icon-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.admin-status {
+  margin: 16px 0;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 0.84rem;
+}
+
+.admin-status.is-info {
+  background: #eff6ff;
+  color: #1e40af;
+}
+
+.admin-status.is-success {
+  border-color: #a7f3d0;
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.admin-status.is-error {
+  border-color: #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.admin-status a {
+  color: inherit;
+  font-weight: 700;
+}
+
+.category-workspace {
+  margin-top: 18px;
+}
+
+.workspace-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.admin-category-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.admin-category-card {
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 11px;
+  background: var(--color-surface);
+}
+
+.admin-category-card.has-errors {
+  border-color: #fca5a5;
+}
+
+.admin-category-header,
+.admin-category-header > div:first-child,
+.admin-category-actions,
+.admin-category-footer {
+  display: flex;
+  align-items: center;
+}
+
+.admin-category-header {
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.admin-category-header > div:first-child {
+  gap: 10px;
+}
+
+.admin-category-header h3 {
+  font-size: 0.98rem;
+}
+
+.admin-category-number {
+  color: var(--color-accent-hover);
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.admin-category-actions {
+  gap: 6px;
+}
+
+.icon-button {
+  min-width: 34px;
+  min-height: 32px;
+  padding: 5px 8px;
+  font-size: 0.75rem;
+}
+
+.admin-category-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.admin-field.is-wide {
+  grid-column: 1 / -1;
+}
+
+.admin-category-footer {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px 18px;
+  margin-top: 14px;
+}
+
+.toggle-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-muted);
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.toggle-field input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-accent);
+}
+
+.category-usage-note {
+  color: var(--color-muted);
+  font-size: 0.76rem;
+}
+
+.category-validation-errors {
+  flex-basis: 100%;
+  padding-left: 18px;
+  color: #b91c1c;
+  font-size: 0.76rem;
+}
+
+.category-toolbar {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
 @media (max-width: 880px) {
   .hero {
     grid-template-columns: 1fr;
@@ -801,6 +1101,19 @@ footer {
   .project-language,
   .category-count {
     margin-top: 8px;
+  }
+
+  .admin-auth,
+  .category-workspace {
+    padding: 20px;
+  }
+
+  .admin-category-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-field.is-wide {
+    grid-column: auto;
   }
 }
 
@@ -866,6 +1179,29 @@ footer {
 
   .doc-page {
     padding-top: 46px;
+  }
+
+  .admin-section-heading,
+  .workspace-heading,
+  .category-toolbar,
+  .admin-category-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .workspace-actions,
+  .admin-category-actions {
+    justify-content: flex-start;
+  }
+
+  .token-input-row {
+    grid-template-columns: 1fr;
+  }
+
+  .token-input-row .primary-button,
+  .category-toolbar .primary-button,
+  .category-toolbar .secondary-button {
+    width: 100%;
   }
 }
 

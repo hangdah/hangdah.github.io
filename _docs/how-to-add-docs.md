@@ -68,15 +68,40 @@ updated: 2026-10-01
 
 ## 新增、修改或删除分类
 
-所有分类都集中定义在 `_data/categories.yml`。首页分类卡片和文档中心筛选按钮会自动读取该文件，不需要分别修改页面代码。
+分类管理页面位于：
 
-新增分类时，在文件中加入一段配置：
+```text
+https://hangdah.github.io/admin/categories/
+```
 
-```yaml
-- slug: control-theory
-  name: 控制理论
-  description: 控制系统分析、设计与学习记录。
-  primary: true
+该页面不会显示在普通访客导航中。使用前需要创建一个 fine-grained GitHub Token：
+
+1. 打开 GitHub 的 **Settings → Developer settings → Personal access tokens → Fine-grained tokens**。
+2. 将 Repository access 限制为 `hangdah/hangdah.github.io`。
+3. 在 Repository permissions 中仅将 **Contents** 设置为 **Read and write**。
+4. 设置合适的有效期并创建 Token。
+
+进入分类管理页面后，将 Token 粘贴到输入框并选择“连接并加载”。Token 只保存在当前页面内存中，不会写入仓库、网址或浏览器存储；刷新或关闭页面后需要重新输入。
+
+连接成功后可以：
+
+- 新增分类并填写名称、英文标识和说明。
+- 修改现有分类的名称、说明及首页显示状态。
+- 使用上下箭头调整分类顺序。
+- 删除尚未被文档使用的分类。
+- 选择“保存到 GitHub”提交配置并触发 Pages 部署。
+
+已经被文档使用的分类不能删除，也不能修改 `slug`。如需删除，应先修改相关 Markdown 文档的 `category`，等待网站重新部署，再回到管理页面删除。
+
+所有分类最终保存在 `_data/categories.json`。首页分类卡片和文档中心筛选按钮会自动读取该文件。管理页面不可用时，也可以手动编辑 JSON：
+
+```json
+{
+  "slug": "control-theory",
+  "name": "控制理论",
+  "description": "控制系统分析、设计与学习记录。",
+  "primary": true
+}
 ```
 
 字段含义如下：
@@ -88,9 +113,7 @@ updated: 2026-10-01
 | `description` | 首页分类卡片中的简短说明。 |
 | `primary` | `true` 时显示在首页和筛选栏；`false` 时仅作为内部分类使用。 |
 
-配置在文件中的排列顺序就是分类卡片和筛选按钮的显示顺序。
-
-删除分类前，先搜索 `_docs` 目录中使用该 `slug` 的文章，将这些文章迁移到其他分类，然后再删除对应配置。否则文章仍能生成，但分类名称会退化为原始 `slug`，也不会出现在筛选按钮中。
+JSON 数组中的排列顺序就是分类卡片和筛选按钮的显示顺序。
 
 ## 编写正文
 
@@ -147,7 +170,7 @@ git diff
 
 ### 文档显示了英文分类标识
 
-检查文档的 `category` 是否能在 `_data/categories.yml` 中找到完全一致的 `slug`。
+检查文档的 `category` 是否能在 `_data/categories.json` 中找到完全一致的 `slug`。
 
 ### 精选项目加载失败
 
@@ -155,4 +178,4 @@ GitHub 公共 API 可能因网络问题或匿名访问频率限制暂时不可�
 
 ### 推送后网站构建失败
 
-优先检查 YAML 缩进、文档开头和结尾的 `---`，以及 Front Matter 中是否存在未闭合的引号。也可以在仓库的 Pages 或 Actions 页面查看具体构建错误。
+优先检查分类 JSON 的逗号和引号、文档开头和结尾的 `---`，以及 Front Matter 中是否存在未闭合的引号。也可以在仓库的 Pages 或 Actions 页面查看具体构建错误。
