@@ -1,0 +1,105 @@
+---
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === "/" ? path === "/" : path === href || path.startsWith(href);
+
+const navigation = [
+  { href: "/docs/", label: "文档" },
+  { href: "/projects/", label: "项目" },
+];
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-title" href="/">hangdah</a>
+
+    <button
+      id="menu-button"
+      class="icon-button menu-button"
+      type="button"
+      aria-label="打开菜单"
+      aria-expanded="false"
+      aria-controls="site-navigation"
+    >
+      <svg class="menu-open-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16"></path>
+      </svg>
+      <svg class="menu-close-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="m6 6 12 12M18 6 6 18"></path>
+      </svg>
+    </button>
+
+    <nav id="site-navigation" class="site-navigation" aria-label="主导航">
+      <a class:list={["nav-link", { active: isActive("/") }]} href="/">首页</a>
+      {
+        navigation.map((item) => (
+          <a
+            class:list={["nav-link", { active: isActive(item.href) }]}
+            href={item.href}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        class:list={["nav-icon", { active: isActive("/search/") }]}
+        href="/search/"
+        aria-label="搜索"
+        title="搜索"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m16 16 4 4"></path>
+        </svg>
+      </a>
+      <button
+        id="theme-button"
+        class="nav-icon"
+        type="button"
+        aria-label="切换为深色主题"
+      >
+        <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z"></path>
+        </svg>
+        <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path
+            d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"
+          ></path>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const menuButton = document.querySelector<HTMLButtonElement>("#menu-button");
+  const navigation = document.querySelector<HTMLElement>("#site-navigation");
+  const themeButton =
+    document.querySelector<HTMLButtonElement>("#theme-button");
+
+  menuButton?.addEventListener("click", () => {
+    const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+    menuButton.setAttribute("aria-expanded", String(!isOpen));
+    menuButton.setAttribute("aria-label", isOpen ? "打开菜单" : "关闭菜单");
+    navigation?.classList.toggle("is-open", !isOpen);
+  });
+
+  function updateThemeButton() {
+    const isDark = document.documentElement.dataset.theme === "dark";
+    themeButton?.setAttribute(
+      "aria-label",
+      isDark ? "切换为浅色主题" : "切换为深色主题",
+    );
+  }
+
+  themeButton?.addEventListener("click", () => {
+    const nextTheme =
+      document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = nextTheme;
+    localStorage.setItem("theme", nextTheme);
+    updateThemeButton();
+  });
+
+  updateThemeButton();
+</script>

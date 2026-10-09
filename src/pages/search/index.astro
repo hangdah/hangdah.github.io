@@ -1,0 +1,38 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="搜索" description="搜索 hangdah 的技术文档与页面。">
+  <header class="page-heading">
+    <h1>搜索</h1>
+    <p>搜索本站的文档与页面内容。</p>
+  </header>
+  <section class="search-page" aria-label="全站搜索">
+    <div id="search"></div>
+    <noscript>需要启用 JavaScript 才能使用全站搜索。</noscript>
+  </section>
+
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline>
+    window.addEventListener("DOMContentLoaded", () => {
+      if (window.PagefindUI) {
+        new window.PagefindUI({
+          element: "#search",
+          showSubResults: true,
+          showImages: false,
+          translations: {
+            placeholder: "搜索本站",
+            zero_results: "没有找到 [SEARCH_TERM] 的相关内容",
+            many_results: "找到 [COUNT] 条结果",
+            one_result: "找到 1 条结果",
+            searching: "正在搜索 [SEARCH_TERM]…",
+          },
+        });
+      } else {
+        document.querySelector("#search").textContent =
+          "搜索索引仅在生产构建后可用。";
+      }
+    });
+  </script>
+</BaseLayout>

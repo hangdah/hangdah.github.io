@@ -1,0 +1,45 @@
+---
+import { getCollection } from "astro:content";
+import DocumentList from "@/components/DocumentList.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const documents = (await getCollection("docs"))
+  .sort((a, b) => b.data.updated.getTime() - a.data.updated.getTime())
+  .slice(0, 5);
+---
+
+<BaseLayout>
+  <section class="home-intro">
+    <h1>你好，我是 hangdah</h1>
+    <p>
+      这里记录电力电子、嵌入式与 DSP、MATLAB 与
+      Simulink，也留下从问题、实验到实现的过程。
+    </p>
+    <p>内容会持续整理，也会随着理解的变化反复修正。</p>
+    <div class="home-links" aria-label="个人链接">
+      <span>链接：</span>
+      <a
+        href="https://github.com/hangdah"
+        target="_blank"
+        rel="noopener noreferrer">GitHub</a
+      >
+      <a href="/rss.xml">RSS</a>
+    </div>
+  </section>
+
+  <section class="content-section" aria-labelledby="recent-title">
+    <div class="section-heading">
+      <h2 id="recent-title">最近更新</h2>
+    </div>
+    {
+      documents.length > 0 ? (
+        <DocumentList documents={documents} />
+      ) : (
+        <p class="empty-state">文档正在整理中。</p>
+      )
+    }
+    <p class="all-documents">
+      <a class="inline-link" href="/docs/">查看全部文档 →</a>
+    </p>
+  </section>
+</BaseLayout>

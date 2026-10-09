@@ -1,0 +1,51 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import categories from "../../../_data/categories.json";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const documents = await getCollection("docs");
+  return documents.map((doc) => ({ params: { slug: doc.id }, props: { doc } }));
+}
+
+interface Props {
+  doc: CollectionEntry<"docs">;
+}
+
+const { doc } = Astro.props;
+const { Content } = await render(doc);
+const category = categories.find((item) => item.slug === doc.data.category);
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat("zh-CN", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "Asia/Shanghai",
+  }).format(date);
+---
+
+<BaseLayout title={doc.data.title} description={doc.data.description}>
+  <article class="doc-page" data-pagefind-body>
+    <header class="doc-header">
+      <a class="back-link" href="/docs/">← 返回文档</a>
+      <span class="tag">{category?.name ?? doc.data.category}</span>
+      <h1 data-pagefind-meta="title">{doc.data.title}</h1>
+      <p class="doc-summary">{doc.data.description}</p>
+      <div class="doc-dates">
+        <span
+          >发布于 <time datetime={doc.data.date.toISOString()}
+            >{formatDate(doc.data.date)}</time
+          ></span
+        >
+        <span
+          >更新于 <time datetime={doc.data.updated.toISOString()}
+            >{formatDate(doc.data.updated)}</time
+          ></span
+        >
+      </div>
+    </header>
+    <div class="doc-content">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

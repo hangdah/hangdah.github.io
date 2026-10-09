@@ -1,0 +1,110 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const documents = await getCollection("docs");
+---
+
+<BaseLayout
+  title="分类管理"
+  description="管理主页的文档分类。"
+  noindex
+  pagefindIgnore
+>
+  <header class="page-heading">
+    <h1>分类管理</h1>
+    <p>
+      新增、编辑、排序或删除文档分类。修改会提交到 GitHub，并触发 Pages
+      重新部署。
+    </p>
+  </header>
+
+  <section class="admin-auth" aria-labelledby="admin-auth-title">
+    <div class="admin-section-heading">
+      <div>
+        <h2 id="admin-auth-title">连接 GitHub</h2>
+        <p>使用仅授权此仓库 Contents 读写权限的 fine-grained token。</p>
+      </div>
+      <a
+        href="https://github.com/settings/personal-access-tokens/new"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        创建 Token →
+      </a>
+    </div>
+
+    <form id="github-auth-form" class="token-form" autocomplete="off">
+      <label for="github-token">GitHub Token</label>
+      <div class="token-input-row">
+        <input
+          id="github-token"
+          name="github-token"
+          type="password"
+          placeholder="github_pat_..."
+          spellcheck="false"
+          autocomplete="off"
+          required
+        />
+        <button class="primary-button" type="submit">连接并加载</button>
+      </div>
+      <p class="field-help">
+        Token 只保存在当前页面内存中，刷新或关闭页面后会被清除。
+      </p>
+    </form>
+  </section>
+
+  <div
+    id="admin-status"
+    class="admin-status"
+    role="status"
+    aria-live="polite"
+    hidden
+  >
+  </div>
+
+  <section
+    id="category-workspace"
+    class="category-workspace"
+    aria-labelledby="category-workspace-title"
+    hidden
+  >
+    <div class="admin-section-heading workspace-heading">
+      <div>
+        <h2 id="category-workspace-title">文档分类</h2>
+        <p id="connection-summary"></p>
+      </div>
+      <div class="workspace-actions">
+        <button id="reload-categories" class="secondary-button" type="button"
+          >重新载入</button
+        >
+        <button id="disconnect-github" class="secondary-button" type="button"
+          >断开连接</button
+        >
+      </div>
+    </div>
+
+    <div id="category-list" class="admin-category-list"></div>
+
+    <div class="category-toolbar">
+      <button id="add-category" class="secondary-button" type="button"
+        >＋ 新增分类</button
+      >
+      <button id="save-categories" class="primary-button" type="button" disabled
+        >保存到 GitHub</button
+      >
+    </div>
+  </section>
+
+  <div id="category-usage" hidden>
+    {
+      documents.map((doc) => (
+        <span data-category={doc.data.category} data-title={doc.data.title} />
+      ))
+    }
+  </div>
+</BaseLayout>
+
+<script>
+  import "../../../../assets/js/category-admin.js";
+</script>

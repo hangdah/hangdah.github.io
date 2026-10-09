@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+import categories from "../../../_data/categories.json";
+import DocumentList from "@/components/DocumentList.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const documents = (await getCollection("docs")).sort(
+  (a, b) => b.data.updated.getTime() - a.data.updated.getTime(),
+);
+const primaryCategories = categories.filter((category) => category.primary);
+---
+
+<BaseLayout title="文档" description="浏览 hangdah 的技术文档与学习记录。">
+  <header class="page-heading">
+    <h1>文档</h1>
+    <p>按主题浏览，或使用关键词查找文档标题与摘要。</p>
+  </header>
+
+  <section class="docs-browser" aria-labelledby="docs-list-title">
+    <h2 id="docs-list-title" class="visually-hidden">文档列表</h2>
+    <div class="docs-toolbar">
+      <label class="search-field" for="doc-search">
+        <span class="visually-hidden">搜索文档</span>
+        <input
+          id="doc-search"
+          type="search"
+          placeholder="搜索文档标题或摘要"
+          autocomplete="off"
+        />
+      </label>
+      <div class="filter-list" aria-label="按分类筛选">
+        <button
+          class="filter-button is-active"
+          type="button"
+          data-category="all"
+          aria-pressed="true"
+        >
+          全部
+        </button>
+        {
+          primaryCategories.map((category) => (
+            <button
+              class="filter-button"
+              type="button"
+              data-category={category.slug}
+              aria-pressed="false"
+            >
+              {category.name}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <DocumentList documents={documents} searchable />
+    <p id="docs-empty" class="empty-state" hidden>没有找到符合条件的文档。</p>
+  </section>
+</BaseLayout>
+
+<script>
+  import "../../../assets/js/site.js";
+</script>

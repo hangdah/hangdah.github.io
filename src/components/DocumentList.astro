@@ -1,0 +1,53 @@
+---
+import type { CollectionEntry } from "astro:content";
+import categories from "../../_data/categories.json";
+
+interface Props {
+  documents: CollectionEntry<"docs">[];
+  searchable?: boolean;
+}
+
+const { documents, searchable = false } = Astro.props;
+const categoryNames = new Map(
+  categories.map((category) => [category.slug, category.name]),
+);
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat("zh-CN", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone: "Asia/Shanghai",
+  }).format(date);
+---
+
+<ul class="post-list" id={searchable ? "docs-list" : undefined}>
+  {
+    documents.map((doc) => (
+      <li
+        class:list={["post-item", { "searchable-document": searchable }]}
+        data-category={searchable ? doc.data.category : undefined}
+        data-search={
+          searchable
+            ? `${doc.data.title} ${doc.data.description}`.toLocaleLowerCase(
+                "zh-CN",
+              )
+            : undefined
+        }
+      >
+        <a class="post-title" href={`/docs/${doc.id}/`}>
+          <h3>{doc.data.title}</h3>
+        </a>
+        <div class="post-meta">
+          <time datetime={doc.data.updated.toISOString()}>
+            更新于 {formatDate(doc.data.updated)}
+          </time>
+          <span aria-hidden="true">·</span>
+          <span>
+            {categoryNames.get(doc.data.category) ?? doc.data.category}
+          </span>
+        </div>
+        <p>{doc.data.description}</p>
+      </li>
+    ))
+  }
+</ul>

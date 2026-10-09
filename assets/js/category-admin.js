@@ -316,7 +316,7 @@
       primaryInput.checked = Boolean(category.primary);
       primaryInput.dataset.index = String(index);
       primaryInput.dataset.field = "primary";
-      primaryLabel.append(primaryInput, document.createTextNode("显示在首页与筛选栏"));
+      primaryLabel.append(primaryInput, document.createTextNode("显示在文档筛选栏"));
       footer.append(primaryLabel);
 
       if (usedBy.length > 0) {
